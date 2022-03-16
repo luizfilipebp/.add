@@ -18,7 +18,7 @@ public class Escola {
     @OneToMany(mappedBy = "escola")
     private List<Turma> turmas;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
 

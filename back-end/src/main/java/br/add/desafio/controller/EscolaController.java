@@ -6,11 +6,14 @@ import br.add.desafio.requests.Escola.EscolaPutRequestBody;
 import br.add.desafio.service.EscolaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/escola")
@@ -21,17 +24,17 @@ public class EscolaController {
     private final EscolaService escolaService;
 
     @GetMapping
-    public ResponseEntity<Page<Escola>> list(Pageable pageable){
+    public ResponseEntity<Page<Escola>> list(@ParameterObject  Pageable pageable){
         return ResponseEntity.ok(escolaService.listAll(pageable));
     }
 
     @PostMapping
-    public ResponseEntity<Escola> save(@RequestBody EscolaPostRequestBody escolaPostRequestBody){
+    public ResponseEntity<Escola> save(@RequestBody @Valid EscolaPostRequestBody escolaPostRequestBody){
         return new ResponseEntity<>(escolaService.save(escolaPostRequestBody), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody EscolaPutRequestBody escolaPutRequestBody){
+    public ResponseEntity<Void> replace(@RequestBody @Valid EscolaPutRequestBody escolaPutRequestBody){
         escolaService.replace(escolaPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
