@@ -3,6 +3,7 @@ package br.add.desafio.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +17,11 @@ public class Turma {
 
     @Column
     private int capacidade;
+
+    @ManyToOne
+    @JoinColumn(name = "id_escola")
+    private Escola escola;
+
+    @OneToMany(mappedBy = "turma")
+    private List<Aluno> alunos;
 }
