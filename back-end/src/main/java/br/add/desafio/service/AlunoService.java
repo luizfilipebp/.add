@@ -1,5 +1,6 @@
 package br.add.desafio.service;
 
+import br.add.desafio.exception.BadRequestException;
 import br.add.desafio.mapper.AlunoMapper;
 import br.add.desafio.model.Aluno;
 import br.add.desafio.repository.AlunoRepository;
@@ -17,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class AlunoService {
     private final AlunoRepository repo;
 
-    public Aluno findByIDOrThrowException(Integer id){
-        return repo.findById(id).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+    public Aluno findByIDOrThrowBadRequestException(Integer id){
+        return repo.findById(id).orElseThrow(() -> new BadRequestException("Aluno não encontrado"));
     }
 
     @Transactional
@@ -31,14 +32,14 @@ public class AlunoService {
     }
 
     public void replace(AlunoPutRequestBody alunoPutRequestBody){
-        Aluno savedAluno = findByIDOrThrowException(alunoPutRequestBody.getId());
+        Aluno savedAluno = findByIDOrThrowBadRequestException(alunoPutRequestBody.getId());
         Aluno aluno = AlunoMapper.INSTANCE.toAluno(alunoPutRequestBody);
         aluno.setId(savedAluno.getId());
         repo.save(aluno);
     }
 
     public void delete (Integer id){
-        repo.delete(findByIDOrThrowException(id));
+        repo.delete(findByIDOrThrowBadRequestException(id));
     }
 
 }
