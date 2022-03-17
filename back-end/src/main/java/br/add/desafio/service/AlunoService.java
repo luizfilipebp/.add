@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class AlunoService {
     private final AlunoRepository repo;
+    private final TurmaService turmaService;
+    private final EscolaService escolaService;
 
     public Aluno findByIDOrThrowBadRequestException(Integer id){
         return repo.findById(id).orElseThrow(() -> new BadRequestException("Aluno não encontrado"));
@@ -24,7 +26,9 @@ public class AlunoService {
 
     @Transactional
     public Aluno save(AlunoPostRequestBody alunoPostRequestBody){
-        return repo.save(AlunoMapper.INSTANCE.toAluno(alunoPostRequestBody));
+        Aluno aluno = AlunoMapper.INSTANCE.toAluno(alunoPostRequestBody);
+        aluno.setTurma(turmaService.findByIDOrThrowBadRequestException(alunoPostRequestBody.getTurmaId()));
+        return repo.save(aluno);
     }
 
     public Page<Aluno> listAll(Pageable pageable){
@@ -35,6 +39,8 @@ public class AlunoService {
         Aluno savedAluno = findByIDOrThrowBadRequestException(alunoPutRequestBody.getId());
         Aluno aluno = AlunoMapper.INSTANCE.toAluno(alunoPutRequestBody);
         aluno.setId(savedAluno.getId());
+        aluno.setTurma(turmaService.findByIDOrThrowBadRequestException(alunoPutRequestBody.getId()));
+
         repo.save(aluno);
     }
 

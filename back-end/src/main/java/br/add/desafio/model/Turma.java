@@ -22,6 +22,6 @@ public class Turma {
     @JoinColumn(name = "id_escola")
     private Escola escola;
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", orphanRemoval = true)
     private List<Aluno> alunos;
 }

@@ -15,7 +15,7 @@ public class Escola {
     @Column
     private String nome;
 
-    @OneToMany(mappedBy = "escola")
+    @OneToMany(mappedBy = "escola", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Turma> turmas;
 
     @OneToOne(cascade = CascadeType.ALL)
