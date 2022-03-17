@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 
 public class EscolaPostRequestBody {
-    @NotEmpty(message = "nome da escola não pode ser vazio")
+    @NotEmpty(message = "NOME da escola nao pode ser vazio")
     private String nome;
 
-    @NotNull(message = "endereço não pode ser vazio")
+    @NotNull(message = "ENDEREÇO da escola nao pode ser vazio")
     private Endereco endereco;
 
 }
