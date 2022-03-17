@@ -1,13 +1,16 @@
 package br.add.desafio.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Data @AllArgsConstructor @NoArgsConstructor @Builder
 
 public class Aluno {
     @Id

@@ -2,6 +2,7 @@ package br.add.desafio.requests.Aluno;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Data @AllArgsConstructor
+@Data @AllArgsConstructor @Builder
 public class AlunoPutRequestBody {
     @Schema(description = "Id do aluno já cadastrado", example = "1", minimum = "0")
     @NotNull(message = "ID do aluno não pode ser vazio")
