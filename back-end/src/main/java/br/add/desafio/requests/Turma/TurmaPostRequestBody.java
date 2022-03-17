@@ -2,13 +2,14 @@ package br.add.desafio.requests.Turma;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Data @AllArgsConstructor
+@Data @AllArgsConstructor @Builder
 public class TurmaPostRequestBody {
     @Schema(description = "Nomme da turma", example = "Turma 001")
     @NotEmpty(message = "NOME da turma nao pode ser vazio")

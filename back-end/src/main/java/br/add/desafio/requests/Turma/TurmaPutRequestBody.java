@@ -2,12 +2,13 @@ package br.add.desafio.requests.Turma;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-@Data @AllArgsConstructor
+@Data @AllArgsConstructor @Builder
 public class TurmaPutRequestBody {
     @Schema(description = "ID da turma já cadastrada", example = "0", minimum = "0")
     @NotNull(message = "ID da turma não pode ser vazio")
